@@ -1,36 +1,27 @@
-// Button Click
-document.getElementById('clickBtn').addEventListener('click', () => {
-    alert('Button clicked!');
+// Color-changing Button
+document.getElementById('colorBtn').addEventListener('click', () => {
+    const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    document.getElementById('colorBtn').style.backgroundColor = randomColor;
   });
   
-  // Hover Effects
-  const hoverDiv = document.getElementById('hoverDiv');
-  hoverDiv.addEventListener('mouseover', () => {
-    hoverDiv.style.backgroundColor = 'lightblue';
+  // Image Gallery
+  const images = ['pexels-googledeepmind-18069239.jpg', 'image2.jpg', 'image3.jpg'];
+  let currentIndex = 0;
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById('galleryImg').src = images[currentIndex];
   });
-  hoverDiv.addEventListener('mouseout', () => {
-    hoverDiv.style.backgroundColor = '';
-  });
-  
-  // Keypress Detection
-  document.getElementById('keyInput').addEventListener('keypress', (e) => {
-    console.log(`Key pressed: ${e.key}`);
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    galleryImg.src = images[currentIndex];
   });
   
-  // Bonus: Double-click & Long Press
-  const secretDiv = document.getElementById('secretDiv');
-  let pressTimer;
-  
-  secretDiv.addEventListener('dblclick', () => {
-    alert('Double-click detected! 🎉');
-  });
-  
-  secretDiv.addEventListener('mousedown', () => {
-    pressTimer = setTimeout(() => {
-      alert('Long press detected! ⏳');
-    }, 2000);
-  });
-  
-  secretDiv.addEventListener('mouseup', () => {
-    clearTimeout(pressTimer);
+  // Tabs
+  document.querySelectorAll('.tabBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tabContent').forEach(content => {
+        content.style.display = 'none';
+      });
+      document.getElementById(btn.dataset.tab).style.display = 'block';
+    });
   });
